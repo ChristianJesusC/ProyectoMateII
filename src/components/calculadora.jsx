@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Container, Row, Col, Form } from "react-bootstrap";
 
 const Funcion = ({ funcion, setFuncion }) => {
+
   const agregarOperador = (operador) => {
     setFuncion(funcion + operador);
   };

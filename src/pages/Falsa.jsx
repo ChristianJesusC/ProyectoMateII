@@ -1,12 +1,15 @@
-import React from "react";
+import React,{useState} from "react";
 import NavBarGeneral from "../components/navBarGeneral";
-import GraficaFuncion from "../components/graficaa";
+import Funcion from "../components/calculadora";
 
 function Falsa() {
+  const [funcion, setFuncion] = useState("");
+  
   return (
     <div>
       <NavBarGeneral />
-      <GraficaFuncion/>
+      <h2>Falsa posición</h2>
+      <Funcion funcion={funcion} setFuncion={setFuncion} />
     </div>
   );
 }
