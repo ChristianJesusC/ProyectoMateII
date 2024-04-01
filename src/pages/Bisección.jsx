@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import { Button, Table } from "react-bootstrap";
 import NavBarGeneral from "../components/navBarGeneral";
 import Funcion from "../components/calculadora";
@@ -16,6 +17,13 @@ function Bisección() {
   };
 
   const aplicarMetodoBiseccion = () => {
+    if(funcion===""||a===""||b===""){
+      Swal.fire({
+        icon: "error",
+        title:"ERROR",
+        text: "Faltan datos"
+      })
+    }else{
     let aActual = parseFloat(a);
     let bActual = parseFloat(b);
     const resultadosTemp = [];
@@ -37,20 +45,11 @@ function Bisección() {
     }
     setResultados(resultadosTemp);
   };
-
+  }
   return (
     <div>
       <NavBarGeneral />
       <h2>Bisección</h2>
-      <input
-        type="range"
-        min="1"
-        max="5"
-        step="1"
-        value={valorI}
-        onChange={handleRangeChange}
-      />
-      <p>Iteraciones totales: {valorI}</p>
       <Funcion funcion={funcion} setFuncion={setFuncion} />
       <div
         style={{
@@ -60,16 +59,25 @@ function Bisección() {
         }}
       >
         <input
+          type="range"
+          min="1"
+          max="5"
+          step="1"
+          value={valorI}
+          onChange={handleRangeChange}
+        />
+        <p>Iteraciones totales: {valorI}</p>
+        <input
           type="text"
           value={a}
           onChange={(e) => setA(e.target.value)}
-          placeholder="Valor inicial a"
+          placeholder="Valor inicial x0"
         />
         <input
           type="text"
           value={b}
           onChange={(e) => setB(e.target.value)}
-          placeholder="Valor inicial b"
+          placeholder="Valor inicial x1"
         />
         <Button onClick={aplicarMetodoBiseccion}>
           Aplicar Método de Bisección
@@ -80,10 +88,10 @@ function Bisección() {
         <thead>
           <tr>
             <th>Iteración</th>
-            <th>a</th>
-            <th>b</th>
-            <th>c</th>
-            <th>f(c)</th>
+            <th>x0</th>
+            <th>x1</th>
+            <th>xi</th>
+            <th>f(xi)</th>
           </tr>
         </thead>
         <tbody>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Funcion from "../components/calculadora";
 import NavBarGeneral from "../components/navBarGeneral";
+import Swal from "sweetalert2";
 import * as math from "mathjs";
 import { Button, Table } from "react-bootstrap";
 
@@ -16,27 +17,36 @@ function MetodoSecante() {
   };
 
   const aplicarMetodoSecante = () => {
-    let x0Actual = parseFloat(x0);
-    let x1Actual = parseFloat(x1);
-    const resultadosTemp = [];
-    for (let i = 0; i < valorI; i++) {
-      const f_x0 = math.evaluate(funcion.replace(/x/g, `(${x0Actual})`));
-      const f_x1 = math.evaluate(funcion.replace(/x/g, `(${x1Actual})`));
-      const x_temp = x1Actual - (f_x1 * (x1Actual - x0Actual)) / (f_x1 - f_x0);
-      x0Actual = x1Actual;
-      x1Actual = x_temp;
-      const f_xi = math.evaluate(funcion.replace(/x/g, `(${x1Actual})`));
-      resultadosTemp.push({
-        iteracion: i + 1,
-        x0: x0Actual,
-        f_x0: f_x0,
-        x1: x1Actual,
-        f_x1: f_x1,
-        xi: x_temp,
-        f_xi: f_xi,
+    if (x0 === "" || x1 === "" || funcion === "") {
+      Swal.fire({
+        icon: "error",
+        title: "ERROR",
+        text: "Faltan datos",
       });
+    } else {
+      let x0Actual = parseFloat(x0);
+      let x1Actual = parseFloat(x1);
+      const resultadosTemp = [];
+      for (let i = 0; i < valorI; i++) {
+        const f_x0 = math.evaluate(funcion.replace(/x/g, `(${x0Actual})`));
+        const f_x1 = math.evaluate(funcion.replace(/x/g, `(${x1Actual})`));
+        const x_temp =
+          x1Actual - (f_x1 * (x1Actual - x0Actual)) / (f_x1 - f_x0);
+        x0Actual = x1Actual;
+        x1Actual = x_temp;
+        const f_xi = math.evaluate(funcion.replace(/x/g, `(${x1Actual})`));
+        resultadosTemp.push({
+          iteracion: i + 1,
+          x0: x0Actual,
+          f_x0: f_x0,
+          x1: x1Actual,
+          f_x1: f_x1,
+          xi: x_temp,
+          f_xi: f_xi,
+        });
+      }
+      setResultados(resultadosTemp);
     }
-    setResultados(resultadosTemp);
   };
 
   return (

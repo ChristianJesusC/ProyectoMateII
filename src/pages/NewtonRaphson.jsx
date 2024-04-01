@@ -3,6 +3,7 @@ import NavBarGeneral from "../components/navBarGeneral";
 import * as math from "mathjs";
 import { Button, Container, Row, Col, Table } from "react-bootstrap";
 import Funcion from "../components/calculadora";
+import Swal from "sweetalert2";
 
 function NewtonRaphson() {
   const [valorInicial, setValorInicial] = useState("");
@@ -27,13 +28,12 @@ function NewtonRaphson() {
   };
 
   const aplicarNewtonRaphson = () => {
-    if (funcion === "") {
-      alert("Faltan la función");
-    }else if(derivada === ""){
-      alert("Falta la derivada")
-    }else if(valorInicial === "" ){
-      alert("Falta el valor inicial")
-    }else {
+    if (funcion === ""||derivada===""||valorInicial==="") {
+      Swal.fire({
+        icon: "error",
+        title:"ERROR",
+        text: "Faltan datos"
+      })    }else {
       let valorActual = valorInicial;
       let resultadosTemp = [];
       for (let i = 0; i < valorI; i++) {
