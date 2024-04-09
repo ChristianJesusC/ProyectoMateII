@@ -13,26 +13,27 @@ const Funcion = ({ funcion, setFuncion }) => {
   const actualizarGrafica = (funcion) => {
     if (typeof funcion === 'string') {
       const xValues = Array.from({ length: 1000 }, (_, i) => i / 100 - 5);
-      const yValues = xValues.map((x) => math.evaluate(funcion.replace("x", x.toString())));
+      const yValues = xValues.map((x) => math.evaluate(funcion, { x }));
       setData([{ x: xValues, y: yValues, type: "scatter", mode: "lines" }]);
-
+  
       let x0 = 0;
       let error = 1e-7;
       let derivada = math.derivative(funcion, 'x').toString();
-
+  
       for (let i = 0; i < 100; i++) {
-        let f = math.evaluate(funcion.replace("x", x0.toString()));
-        let df = math.evaluate(derivada.replace("x", x0.toString()));
-
+        let f = math.evaluate(funcion, { x: x0 });
+        let df = math.evaluate(derivada, { x: x0 });
+  
         if (Math.abs(f) < error) {
           break;
         }
-
+  
         x0 = x0 - f / df;
       }
       setData(prevData => [...prevData, { x: [x0], y: [0], mode: 'markers', marker: { color: 'red', size: 10 }}]);
     }
   };
+  
 
   return (
     <Container className="mt-5">
