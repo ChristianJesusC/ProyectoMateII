@@ -52,6 +52,7 @@ function MetodoSecante() {
   return (
     <div>
       <NavBarGeneral />
+      <h1>Secante</h1>
       <Funcion funcion={funcion} setFuncion={setFuncion} />
       <div
         style={{

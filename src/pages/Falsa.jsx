@@ -53,7 +53,7 @@ function Bisección() {
   return (
     <div>
       <NavBarGeneral />
-      <h2>Bisección</h2>
+      <h2>Falsa Posición</h2>
       <Funcion funcion={funcion} setFuncion={setFuncion} />
       <div
         style={{

@@ -6,6 +6,7 @@ import Bisección from "./pages/Bisección";
 import Falsa from "./pages/Falsa"
 import NewtonRaphson from "./pages/NewtonRaphson";
 import Secante from "./pages/Secante";
+import Ejmplo from "./pages/ejemplo";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/falsa" element={<Falsa />} />
           <Route path="/newton" element={<NewtonRaphson />} />
           <Route path="/secante" element={<Secante />} />
+          <Route path="/ejemplo" element={<Ejmplo />} />
         </Routes>
       </BrowserRouter>
     </div>
